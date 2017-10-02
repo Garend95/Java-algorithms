@@ -54,17 +54,47 @@ public class RodCutting2D {
             }
         }
 
-        for (int i = 1; i <= n; i++) {
+        /*for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= m; j++) {
                 System.out.print(d[i][j] + " ");
             }
             System.out.println();
         }
+        System.out.println();
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                System.out.print(max_index[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                System.out.print(cut_is_vertical[i][j] + " ");
+            }
+            System.out.println();
+        }*/
 
-        R.print(n, m);
+        System.out.println(d[n][m]);
+        R.print(n, m, max_index, cut_is_vertical);
     }
 
-    private void print(int n, int m) {
+    private void print(int n, int m, int[][] max_index, boolean[][] cut_is_vertical) {
 
+        if(max_index[n][m] == 0){
+            System.out.print(n + "x" + m + " ");
+            return;
+        }
+        if (cut_is_vertical[n][m]) {
+            print(n, m - max_index[n][m], max_index, cut_is_vertical);
+            print(n, max_index[n][m], max_index, cut_is_vertical);
+        }
+        else {
+            print(n - max_index[n][m], m, max_index, cut_is_vertical);
+            print(max_index[n][m], m, max_index, cut_is_vertical);
+        }
     }
+
+
 }
+
